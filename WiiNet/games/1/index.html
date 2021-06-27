@@ -1,16 +1,9 @@
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="viewport" content="width=device-width" />
-<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
-<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
-<link rel="stylesheet" href="css1.css" type="text/css" />
-<link rel="stylesheet" href="css2.css" type="text/css" />
-	<title>Dungeon Escape | WiiNet Lite Games</title>
-
-	<script language="javascript" type="text/javascript" src="3dfps.js"></script>
-	<script language="javascript" type="text/javascript">
-		var mousex=160, mousey=120, angle=180;
+<link rel="stylesheet" href="css.css" type="text/css" />
+<script language="javascript" type="text/javascript" src="3dfps.js"></script>
+<script language="javascript" type="text/javascript">
+	var mousex=160, mousey=120, angle=180;
 
 		Textures = [];
 		(Textures[0] = new Image()).src = 'tiles/tile-brick.png';
@@ -71,8 +64,7 @@
 			}
 
 			RayCaster.initialize(document.getElementById('thecanvas'));
-
-			RayCaster.setSize(600,300);
+			RayCaster.setSize(400,300);
 			RayCaster.setLocation(1.5,1.5);
 			RayCaster.setDirection(angle);
 			RayCaster.setSkyColor(192,192,255);
@@ -81,7 +73,6 @@
 			RayCaster.setWalls(Walls);
 			RayCaster.setTextures(Textures);
 			RayCaster.setTeleports(Teleports);
-
 			animate();
 		}
 
@@ -103,8 +94,10 @@
 
 </head>
 <body>
+    <a href="../index.html"><img src="../../img/GamesLogo.png" alt="Return To Games" style="width:150px;height:50px;"></a>
+    <br><span style="font-size:36px;font-weight:bold;">Dungeon Escape</span> - by Daniel Gump<br>
 	<div style="text-align:center">
-		<canvas id="thecanvas" width="600" height="400" style="background:#000;"></canvas>
+		<canvas id="thecanvas" width="400" height="300" style="background:#000;"></canvas>
 	</div>
 	<div id="status"></div>
 
