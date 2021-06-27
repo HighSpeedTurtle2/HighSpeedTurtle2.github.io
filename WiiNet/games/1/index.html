@@ -1,37 +1,113 @@
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>WiiNet</title>
-</body></html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="stylesheet" href="css1.css" type="text/css" />
+<link rel="stylesheet" href="css2.css" type="text/css" />
+	<title>Dungeon Escape | WiiNet Lite Games</title>
 
+	<script language="javascript" type="text/javascript" src="3dfps.js"></script>
+	<script language="javascript" type="text/javascript">
+		var mousex=160, mousey=120, angle=180;
+
+		Textures = [];
+		(Textures[0] = new Image()).src = 'tiles/tile-brick.png';
+		(Textures[1] = new Image()).src = 'tiles/tile-brick.png';
+		(Textures[2] = new Image()).src = 'tiles/tile-rock.png';
+		(Textures[3] = new Image()).src = 'tiles/tile-woodwall.png';
+		(Textures[4] = new Image()).src = 'tiles/tile-win.png';
+		(Textures[5] = new Image()).src = 'tiles/sky.jpg';
+
+		Walls = [];
+		Walls[0] = [1,1,1,1,1,1,1,1,1,1];
+		Walls[1] = [1,0,0,0,1,0,0,0,0,1];
+		Walls[2] = [1,0,0,0,1,0,1,0,0,1];
+		Walls[3] = [1,0,0,0,0,0,0,1,0,1];
+		Walls[4] = [1,1,1,1,1,1,0,1,0,1];
+		Walls[5] = [1,0,0,0,0,0,0,1,0,1];
+		Walls[6] = [2,0,2,2,2,0,2,0,0,1];
+		Walls[7] = [2,0,0,0,0,2,0,0,1,1];
+		Walls[8] = [2,0,2,2,0,0,1,0,0,1];
+		Walls[9] = [2,0,0,0,2,0,0,2,0,1];
+		Walls[10] =[2,0,2,0,2,0,2,0,0,1];
+		Walls[11] =[2,0,2,0,0,2,0,2,2,2];
+		Walls[12] =[3,0,0,3,0,0,0,2,2,2];
+		Walls[13] =[3,3,3,3,0,3,0,0,0,3];
+		Walls[14] =[3,0,0,0,0,3,0,3,0,3];
+		Walls[15] =[3,0,3,0,3,0,3,0,0,3];
+		Walls[16] =[3,3,3,0,0,0,0,3,0,3];
+		Walls[17] =[1,0,0,3,0,3,0,3,0,3];
+		Walls[18] =[1,0,2,0,3,0,0,3,0,3];
+		Walls[19] =[1,0,0,0,0,0,2,0,3,3];
+		Walls[20] =[1,0,0,2,2,2,0,0,0,2];
+		Walls[21] =[1,0,2,0,0,0,0,2,0,2];
+		Walls[22] =[3,0,0,0,2,0,2,0,2,2];
+		Walls[23] =[3,0,2,0,2,2,0,0,0,2];
+		Walls[24] =[3,0,2,0,0,0,0,2,0,4];
+		Walls[25] =[1,0,0,1,1,1,1,2,4,4];
+		Walls[26] =[1,1,0,0,0,0,1,4,0,4];
+		Walls[27] =[1,1,1,1,1,1,1,2,4,4];
+
+		Teleports = [];
+		Teleports[0] = [8.5,24.5, 8.5,26.5, '../index.html'];
+
+		window.onload = function(){
+			window.onmousemove = function(e){
+				mousex=e.clientX;
+				mousey=e.clientY;
+				return false;
+			}
+			window.onkeydown = function(e){
+				switch(e.keyCode){
+					case 37: mousex=80; break;
+					case 39: mousex=240; break;
+					case 38: mousey=90; break;
+					case 40: mousey=200; break;
+					case 13: mousex=160; mousey=160; break;
+				}
+				return false;
+			}
+
+			RayCaster.initialize(document.getElementById('thecanvas'));
+
+			RayCaster.setSize(600,300);
+			RayCaster.setLocation(1.5,1.5);
+			RayCaster.setDirection(angle);
+			RayCaster.setSkyColor(192,192,255);
+			RayCaster.setGroundColor(64,32,0);
+			RayCaster.setSkyImage(5);
+			RayCaster.setWalls(Walls);
+			RayCaster.setTextures(Textures);
+			RayCaster.setTeleports(Teleports);
+
+			animate();
+		}
+
+		function animate(){
+			angle+=(mousex-160)>>3;
+			angle=(angle+360)%360;
+			RayCaster.setDirection(angle);
+
+			if(mousey<60) RayCaster.moveForward();
+			if(mousey<100) RayCaster.moveForward();
+			if(mousey<140) RayCaster.moveForward();
+			if(mousey>180) RayCaster.moveBackward();
+			RayCaster.checkTeleports();
+			RayCaster.generateScene();
+
+			setTimeout("animate()", 20);
+		}
+	</script>
+
+</head>
 <body>
-<a href="../index.html"><img src="../../img/GamesLogo.png" alt="Return To Games" style="width:150px;height:50px;"></a>
-<style>
-            body {
-                background-color: #BA00FF;
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                background-position: top;
-                background-repeat: no-repeat;
-            }
-            .ctn2_3473, contenu_3473{
-                background:transparent;
-                background-color:#BA00FF;
-            }
-        </style>
-<h1>Escaping the Prison</h1>
-<div style="text-align:center;background-color:black;"><div id="swfcontent">
-<object type="application/x-shockwave-flash" data="game.swf" width="384" height="256" id="WiiNet Games" style="visibility: visible;">
-<param name="id" value="WiiNet Games">
-<param name="wmode" value="transparent">
-<param name="allowFullScreen" value="false">
-<param name="allowScriptAccess" value="sameDomain">
-<param name="quality" value="high">
-<param name="flashvars" value="WiiNet Games">
-</object>
-</div>
-</div>
-<br>
-<center>	Zoom in with the + button on your Wii Remote to get a full screen view!<br>Some games may cause the Wii to run out of browser memory initially. Try refreshing!
+	<div style="text-align:center">
+		<canvas id="thecanvas" width="600" height="400" style="background:#000;"></canvas>
+	</div>
+	<div id="status"></div>
 
-
-</body></html>
+	</body>
+</body>
+</html>
